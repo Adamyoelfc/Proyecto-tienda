@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+{% block title %} Inicio {% endblock %}
+
+{% block content %}
+        <h1 class="display-4 text-center">Primera plantilla de inicio</h1>
+    <div class="card col-md-6 col-lg-6 mx-auto">
+        {% if user.is_authenticated %}
+            <h4>Bienvenido {{ user.username }}</h4>
+            <br>
+           {% if user.user_profile.photo %}
+               <h5 class="text-muted"> <img src="/static/bootstrap/bootstrap-icons-1.0.0-alpha4/person-bounding-box.svg" width="30" alt=""> Foto de perfil</h5>
+               <br>
+                <img src="/media/{{ user.user_profile.photo }}" width="200px" alt="asd">
+               <br>
+           {% endif %}
+            {% if user.user_profile.telefono %}
+                <h5 class="text-muted"> <img src="/static/bootstrap/bootstrap-icons-1.0.0-alpha4/phone.svg" width="25" alt="">  Telefono:   </h5>
+                <p>{{user.user_profile.telefono}}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

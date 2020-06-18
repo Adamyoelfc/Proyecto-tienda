@@ -1,0 +1,43 @@
+{% extends 'home/base.html' %}
+{% block title %}
+    Producto {{ producto.nombre }}
+{% endblock %}
+
+{% block content %}
+<div class="card col-lg-8 mx-lg-auto">
+    <div class="card-header">
+        <h1 class="card-title text-center">{{ producto.nombre }}</h1>
+    </div>
+    <div class="card-body">
+            <img class="card-img-bottom"  src="/media/{{ producto.imagen }}" alt="imagen producto">
+        <br>
+        <hr>
+
+        <h4 class="card-text"> Descripcion del producto: <br> <h5 class="text-muted">{{ producto.descripcion }}</h5></h4>
+        <h3 class="card-text">Precio: <br> <h5 class="text-muted">{{ producto.precio }} $</h5></h3>
+
+    {% if producto.stock > 0 %}
+        <h3 class="card-text">Unidades en existencia: <br> <h5 class="text-muted">{{ producto.stock }}</h5></h3>
+        <div class="card-footer text-center">
+            <button type="button" class="btn btn-outline-success"><img width="20" src="/static/bootstrap/bootstrap-icons-1.0.0-alpha4/cart-plus.svg" alt="">  Comprar</button>
+        </div>
+        <br>
+    {% else %}
+        <div class="jumbotron jumbotron-fluid text-center">
+            <h3 class="display-4">Producto agotado</h3>
+        </div>
+    {% endif %}
+        <div class="row" >
+            <a class="col-lg-3" href="javascript:window.history.go(-1)"><button class="btn btn-default" > <img width="20" src="/static/bootstrap/bootstrap-icons-1.0.0-alpha4/backspace-fill.svg" alt="Regresar"> Atras</button></a>
+
+          <div class="col-lg-9 text-right">
+          <h5 class="text-muted">Categorias</h5>
+            {% for categoria in categorias %}
+                   <span class=" badge badge-info">{{ categoria.nombre }}</span>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

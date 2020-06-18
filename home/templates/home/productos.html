@@ -1,0 +1,67 @@
+{% extends 'home/base.html' %}
+{% block title %}
+    Lista de productos
+{% endblock %}
+{% block content %}
+<div class="container" style="padding-left: 20px">
+    <h1 class="text-center">Catalogos de productos</h1>
+
+    <br>
+    {% if productos %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th></th>
+                    {% if user.is_authenticated  %}
+                        <div class="pull-right col-lg-1">
+                            <th><a class="btn btn-md btn-outline-secondary" href="{% url 'agregar_prod' %}"><img  src="/static/bootstrap/bootstrap-icons-1.0.0-alpha4/plus-circle.svg" alt="add"> Agregar Producto</a></th>
+                        </div>
+     {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+               {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.precio }} $</td>
+                        <td>{{ producto.stock }}</td>
+                        <td><a class="btn btn-outline-secondary" href="{% url 'single_prod' id_prod=producto.id %}"><img src="/static/bootstrap/bootstrap-icons-1.0.0-alpha4/search.svg" style="padding-right: 5px" alt="ver">Ver</a></td>
+                        <td><a class="btn btn-outline-secondary" href="#"><img src="/static/bootstrap/bootstrap-icons-1.0.0-alpha4/cart.svg" alt="comprar" style="padding-right: 5px">Comprar</a></td>
+                    {% if user.is_authenticated and user.is_staff %}
+                        <td><a class="btn btn-outline-secondary" href="{% url 'editar_prod' id_prod=producto.id %}"><img src="/static/bootstrap/bootstrap-icons-1.0.0-alpha4/pencil-square.svg" style="padding-right: 5px" alt="edit">Edit</a></td>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No existen productos activos en venta :(</p>
+    {% endif %}
+
+
+    {% if productos %}
+   <nav aria-label="asd" class="col-lg-3 mx-auto">
+      <ul class="pagination justify-content-center">
+            <li class="page-item" ><a class="page-link" href="/productos/page/1"><<</a></li>
+        {% if productos.has_previous %}
+            <li class="page-item" ><a class="page-link" href="/productos/page/{{ productos.previous_page_number }}"> Prev </a></li>
+        {% else %}
+            <li class="page-item" ><a class="page-link" href="#">Prev</a></li>
+        {% endif %}
+
+        {% if productos.has_next %}
+            <li class="page-item" ><a class="page-link" href="/productos/page/{{ productos.next_page_number }}"> Nex </a></li>
+        {% else %}
+            <li class="page-item" ><a class="page-link" href="#">Nex</a></li>
+        {% endif %}
+            <li class="page-item" ><a class="page-link" href="/productos/page/{{ productos.paginator.num_pages }}"> >> </a></li>
+      </ul>
+   </nav>
+        <br><br>
+        <h4>Pagina {{ productos.number }} de {{ productos.paginator.num_pages }}</h4>
+    {% endif %}
+</div>
+{% endblock %}

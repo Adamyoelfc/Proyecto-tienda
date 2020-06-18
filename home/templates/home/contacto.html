@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Contactos{% endblock %}
+{% block content %}
+
+{% if info_enviado %}
+    <p>Gracias por enviar asdasdasdasd</p>
+    <p>email utilizado : {{ email }}</p>
+    <p>titulo utilizado : {{ titulo }}</p>
+    <p>texto utilizado : {{ texto }}</p>
+{% else %}
+ <div class="container col-lg-8 col-md-8 col-8 mx-lg-auto" style="padding-top: 30px">
+      <div class="form-control form-control-lg">
+        <form class="form" action="" method="post"> {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-outline-secondary" type="submit" value="Submit">
+        </form>
+      </div>
+ </div>
+{% endif %}
+
+{% endblock %}

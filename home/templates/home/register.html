@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+    <form action="" method="POST" class=" col-lg-8 mx-lg-auto" style="padding-top: 3rem">{% csrf_token %}
+{#        {{ form.errors }}#}
+{#        {{ form }}#}
+
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                </div>
+                <br>
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+                <div class="form-group">
+                    {{ form.password_1.label_tag }}
+                    {{ form.password_1 }}
+                    {{ form.password_1.errors }}
+                </div>
+                <div class="form-group">
+                    {{ form.password_2.label_tag }}
+                    {{ form.password_2 }}
+                    {{ form.password_2.errors }}
+                </div>
+        <button type="submit" class="btn btn-primary">Registra</button>
+        <button type="reset" class="btn btn-secondary">Cancelar</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'home/base.html' %}
+{% block title %}
+    Registrado
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <h5 class="display-4">Gracias por registrarse</h5>
+    </div>
+    <div class="mx-auto"><a href="{% url 'vista_login' %}"><button class="btn btn-primary">Iniciar seccion</button></a></div>
+{% endblock %}
